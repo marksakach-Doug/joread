@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joread — Read</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,440;9..144,560;9..144,620&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-night: #10152a;
+    --bg-panel: #1a2238;
+    --bg-panel-raised: #212b46;
+    --water: #2a3a52;
+    --accent: #6ea886;
+    --parchment: #ece4d3;
+    --muted: #8f99b3;
+    --border-soft: rgba(236, 228, 211, 0.12);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; min-height: 100vh; background: var(--bg-night); color: var(--parchment); font-family: 'Be Vietnam Pro', -apple-system, sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; padding: 28px 16px 56px; }
+  .wrap { width: 100%; max-width: 620px; }
+  h1 { font-family: 'Fraunces', serif; font-weight: 560; font-size: clamp(1.4rem, 5vw, 1.85rem); text-align: center; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .subtitle { text-align: center; color: var(--muted); font-size: 0.88rem; margin: 0 0 20px; line-height: 1.5; }
+
+  .story-select-wrapper { text-align: center; margin-bottom: 26px; }
+  .story-dropdown {
+    appearance: none;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    color: var(--parchment);
+    padding: 10px 36px 10px 16px;
+    border-radius: 8px;
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ece4d3%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px top 50%;
+    background-size: 12px auto;
+    max-width: 100%;
+  }
+  .story-dropdown:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .story-title { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.35rem; text-align: center; margin: 0 0 2px; color: var(--parchment); }
+  .story-author { text-align: center; color: var(--muted); font-size: 0.9rem; margin: 0 0 22px; font-style: italic; }
+
+  .story-block { margin-bottom: 22px; }
+  .story-text { font-size: 1.1rem; line-height: 1.9; margin: 0; white-space: pre-line; color: var(--parchment); }
+  .story-figure { margin: 0; text-align: center; background: var(--bg-panel); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px; }
+  .story-figure img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px; }
+  .story-figure figcaption { margin-top: 8px; font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Joread</h1>
+  <p class="subtitle">Stories for Jories.</p>
+  <div id="app"><p class="subtitle">Loading…</p></div>
+</div>
+<script>
+(function () {
+  var STORAGE_KEY = 'joread-last-story';
+  var STORIES = [];
+  var activeStory = null;
+
+  function escapeHtml(s) {
+    return (s || '').replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function loadLastStory() {
+    try {
+      var id = localStorage.getItem(STORAGE_KEY);
+      if (id && STORIES.some(function (s) { return s.id === id; })) return id;
+    } catch (e) {}
+    return STORIES.length ? STORIES[0].id : null;
+  }
+
+  function saveLastStory(id) {
+    try { localStorage.setItem(STORAGE_KEY, id); } catch (e) {}
+  }
+
+  function selectStory(id) {
+    activeStory = id;
+    saveLastStory(id);
+    render();
+  }
+
+  function render() {
+    var app = document.getElementById('app');
+
+    var storySelect = '<div class="story-select-wrapper"><select id="story-select" class="story-dropdown">';
+    STORIES.forEach(function (s) {
+      var isSelected = s.id === activeStory ? ' selected' : '';
+      storySelect += '<option value="' + escapeHtml(s.id) + '"' + isSelected + '>' + escapeHtml(s.title) + '</option>';
+    });
+    storySelect += '</select></div>';
+
+    var story = STORIES.find(function (s) { return s.id === activeStory; }) || {};
+    var header = '<div class="story-title">' + escapeHtml(story.title || '') + '</div>';
+    if (story.author) header += '<div class="story-author">' + escapeHtml(story.author) + '</div>';
+
+    var blocksHtml = '';
+    if (!story.blocks || story.blocks.length === 0) {
+      blocksHtml = '<div class="story-block" style="text-align:center; color: var(--muted);"><p>No content for this story.</p></div>';
+    } else {
+      blocksHtml = story.blocks.map(function (b) {
+        if (b.type === 'text') {
+          return '<div class="story-block"><p class="story-text">' + escapeHtml(b.content) + '</p></div>';
+        } else if (b.type === 'image') {
+          return '<div class="story-block"><figure class="story-figure">' +
+            '<img src="' + escapeHtml(b.src) + '" alt="' + escapeHtml(b.alt || '') + '" loading="lazy">' +
+            (b.caption ? '<figcaption>' + escapeHtml(b.caption) + '</figcaption>' : '') +
+            '</figure></div>';
+        } else {
+          return '';
+        }
+      }).join('');
+    }
+
+    app.innerHTML = storySelect + header + blocksHtml;
+
+    document.getElementById('story-select').addEventListener('change', function (e) {
+      selectStory(e.target.value);
+    });
+  }
+
+  async function init() {
+    var app = document.getElementById('app');
+    try {
+      var res = await fetch('stories.json');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var data = await res.json();
+      STORIES = data.stories || [];
+    } catch (e) {
+      app.innerHTML = '<div style="text-align:center; color: var(--muted);"><p>Could not load stories.json.</p><p>If you opened index.html directly, run <code>python3 -m http.server</code> in this folder and open <code>http://localhost:8000</code>.</p></div>';
+      return;
+    }
+    activeStory = loadLastStory();
+    render();
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
