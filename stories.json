@@ -4,8 +4,8 @@
   "stories": [
     {
       "id": "welcome",
-      "title": "Welcome",
-      "author": "Joread",
+      "title": "",
+      "author": "",
       "blocks": [
         {
           "type": "text",
@@ -13,11 +13,11 @@
         },
         {
           "type": "text",
-          "content": "To add your own stories, edit stories.json. Each story is a list of blocks — text paragraphs and images — in the order you want them to appear."
+          "content": ""
         },
         {
           "type": "text",
-          "content": "If you have an .odt file (for example Unbounced.odt), run tools/odt2json.py on it to turn the text and images into a story block you can paste into stories.json."
+          "content": ""
         }
       ]
     },
@@ -291,7 +291,7 @@
         },
         {
           "type": "text",
-          "content": "There was a pattering noise . . . then silence again."
+          "content": "There was a pattering noise . . . then silence again."
         },
         {
           "type": "text",
@@ -373,15 +373,15 @@
         },
         {
           "type": "text",
-          "content": "“It’s very silly,” said Rabbit, “but just for the moment I——— Ah, of course. Come on . . . ”"
+          "content": "“It’s very silly,” said Rabbit, “but just for the moment I——— Ah, of course. Come on . . . ”"
         },
         {
           "type": "text",
-          "content": "“Here we are,” said Rabbit ten minutes later. “No, we’re not . . .”"
+          "content": "“Here we are,” said Rabbit ten minutes later. “No, we’re not . . .”"
         },
         {
           "type": "text",
-          "content": "“Now,” said Rabbit ten minutes later, “I think we ought to be getting—or are we a little bit more to the right than I thought? . . . ”"
+          "content": "“Now,” said Rabbit ten minutes later, “I think we ought to be getting—or are we a little bit more to the right than I thought? . . . ”"
         },
         {
           "type": "text",
@@ -529,7 +529,7 @@
         },
         {
           "type": "text",
-          "content": "Rabbit gave a laugh to show how silly Piglet was, and walked into the mist. After he had gone a hundred yards, he turned and walked back again . . . and after Pooh and Piglet had waited twenty minutes for him, Pooh got up."
+          "content": "Rabbit gave a laugh to show how silly Piglet was, and walked into the mist. After he had gone a hundred yards, he turned and walked back again . . . and after Pooh and Piglet had waited twenty minutes for him, Pooh got up."
         },
         {
           "type": "text",
@@ -545,7 +545,7 @@
         },
         {
           "type": "text",
-          "content": "They walked off together; and for a long time Piglet said nothing, so as not to interrupt the pots; and then suddenly he made a squeaky noise . . . and an oo-noise . . . because now he began to know where he was; but he still didn’t dare to say so out loud, in case he wasn’t. And just when he was getting so sure of himself that it didn’t matter whether the pots went on calling or not, there was a shout from in front of them, and out of the mist came Christopher Robin."
+          "content": "They walked off together; and for a long time Piglet said nothing, so as not to interrupt the pots; and then suddenly he made a squeaky noise . . . and an oo-noise . . . because now he began to know where he was; but he still didn’t dare to say so out loud, in case he wasn’t. And just when he was getting so sure of himself that it didn’t matter whether the pots went on calling or not, there was a shout from in front of them, and out of the mist came Christopher Robin."
         },
         {
           "type": "image",
@@ -589,7 +589,7 @@
         },
         {
           "type": "text",
-          "content": "So he went home with Pooh, and watched him for quite a long time . . . and all the time he was watching, Tigger was tearing round the Forest making loud yapping noises for Rabbit. And at last a very Small and Sorry Rabbit heard him. And the Small and Sorry Rabbit rushed through the mist at the noise, and it suddenly turned into Tigger; a Friendly Tigger, a Grand Tigger, a Large and Helpful Tigger, a Tigger who bounced, if he bounced at all, in just the beautiful way a Tigger ought to bounce."
+          "content": "So he went home with Pooh, and watched him for quite a long time . . . and all the time he was watching, Tigger was tearing round the Forest making loud yapping noises for Rabbit. And at last a very Small and Sorry Rabbit heard him. And the Small and Sorry Rabbit rushed through the mist at the noise, and it suddenly turned into Tigger; a Friendly Tigger, a Grand Tigger, a Large and Helpful Tigger, a Tigger who bounced, if he bounced at all, in just the beautiful way a Tigger ought to bounce."
         },
         {
           "type": "text",
@@ -609,7 +609,7 @@
       "blocks": [
         {
           "type": "text",
-          "content": "The Cyclone"
+          "content": ""
         },
         {
           "type": "image",
